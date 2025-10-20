@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "PagePDF - Smart Content Printer",
+  "version": "1.0.0",
+  "description": "Print only the main content of web pages to PDF, excluding sidebars and clutter",
+  "author": "Yongqiang Duan",
+  "homepage_url": "https://github.com/yourusername/pagepdf",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

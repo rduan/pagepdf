@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page - DataHub Architecture Overview</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .header {
+      background: #1a1a2e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .navigation {
+      background: #16213e;
+      color: white;
+      padding: 15px;
+    }
+
+    .navigation a {
+      color: #4ecca3;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f5f5f5;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      padding: 8px 0;
+    }
+
+    .sidebar a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      max-width: 800px;
+    }
+
+    .main-content h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .main-content h2 {
+      font-size: 24px;
+      margin-top: 30px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .main-content h3 {
+      font-size: 20px;
+      margin-top: 25px;
+    }
+
+    .main-content p {
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    .main-content code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .main-content pre {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .right-sidebar {
+      width: 250px;
+      background: #fafafa;
+      padding: 20px;
+    }
+
+    .right-sidebar h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .advertisement {
+      background: #ffe4e1;
+      padding: 15px;
+      margin: 20px 0;
+      border: 1px dashed #ff6b6b;
+      text-align: center;
+    }
+
+    .footer {
+      background: #1a1a2e;
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>TechDocs - Documentation Hub</h1>
+    <p>Your comprehensive guide to modern architecture</p>
+  </header>
+
+  <nav class="navigation">
+    <a href="#">Home</a>
+    <a href="#">Documentation</a>
+    <a href="#">Tutorials</a>
+    <a href="#">API Reference</a>
+    <a href="#">Community</a>
+    <a href="#">Support</a>
+  </nav>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Documentation</h3>
+      <ul>
+        <li><a href="#">Getting Started</a></li>
+        <li><a href="#">Architecture</a></li>
+        <li><a href="#">Components</a></li>
+        <li><a href="#">Configuration</a></li>
+        <li><a href="#">Deployment</a></li>
+        <li><a href="#">Best Practices</a></li>
+        <li><a href="#">Troubleshooting</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+
+      <div class="advertisement">
+        <strong>Advertisement</strong><br>
+        Special Offer!<br>
+        Get 50% off Premium
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <h1>DataHub Architecture Overview</h1>
+
+      <p>
+        DataHub is a modern data catalog built to enable end-to-end data discovery,
+        observability, and governance. This document provides a comprehensive overview
+        of its architecture and key components.
+      </p>
+
+      <h2>Introduction</h2>
+
+      <p>
+        The architecture of DataHub is designed with scalability, extensibility, and
+        maintainability in mind. It follows a microservices architecture pattern,
+        allowing different components to scale independently based on workload requirements.
+      </p>
+
+      <p>
+        At its core, DataHub consists of three main layers: the ingestion layer,
+        the serving layer, and the presentation layer. Each layer has distinct
+        responsibilities and can be deployed and scaled independently.
+      </p>
+
+      <h2>Core Components</h2>
+
+      <h3>Metadata Service (GMS)</h3>
+
+      <p>
+        The Metadata Service, also known as GMS (Generalized Metadata Service), is the
+        primary backend service that powers DataHub. It provides RESTful APIs for reading
+        and writing metadata, and it's responsible for enforcing access controls and
+        maintaining data consistency.
+      </p>
+
+      <p>
+        GMS interacts with several storage systems:
+      </p>
+
+      <ul>
+        <li><strong>Primary Store</strong>: MySQL or PostgreSQL for storing versioned metadata</li>
+        <li><strong>Search Index</strong>: Elasticsearch for full-text search capabilities</li>
+        <li><strong>Graph Store</strong>: Neo4j (optional) for relationship queries</li>
+        <li><strong>Message Queue</strong>: Kafka for event streaming</li>
+      </ul>
+
+      <h3>Frontend Service</h3>
+
+      <p>
+        The Frontend Service is a Node.js application that serves the React-based web
+        interface. It acts as a proxy between the UI and the backend services, handling
+        authentication, session management, and providing a GraphQL API for efficient
+        data fetching.
+      </p>
+
+      <h3>Metadata Ingestion</h3>
+
+      <p>
+        DataHub's metadata ingestion framework is plugin-based and supports extracting
+        metadata from a wide variety of data sources. The ingestion process can be
+        run as:
+      </p>
+
+      <pre><code>datahub ingest -c recipe.yml</code></pre>
+
+      <p>
+        Popular sources include: MySQL, PostgreSQL, MongoDB, Kafka, Airflow, dbt,
+        Looker, Tableau, and many more.
+      </p>
+
+      <h2>Architecture Diagram</h2>
+
+      <p>
+        The following diagram illustrates how different components interact within
+        the DataHub ecosystem:
+      </p>
+
+      <p><em>[Diagram would be here showing component interactions]</em></p>
+
+      <h2>Data Model</h2>
+
+      <p>
+        DataHub's data model is built on a concept called "entities" and "aspects".
+        An entity represents a metadata object (like a dataset, dashboard, or user),
+        while aspects represent different facets of information about that entity.
+      </p>
+
+      <h3>Key Entities</h3>
+
+      <ul>
+        <li><code>Dataset</code>: Represents tables, views, or collections</li>
+        <li><code>Chart</code>: Visualization artifacts</li>
+        <li><code>Dashboard</code>: Collections of charts</li>
+        <li><code>DataJob</code>: ETL jobs or data pipelines</li>
+        <li><code>DataFlow</code>: Workflows containing multiple jobs</li>
+        <li><code>CorpUser</code>: User entities</li>
+        <li><code>CorpGroup</code>: User groups</li>
+      </ul>
+
+      <h2>Scalability Considerations</h2>
+
+      <p>
+        DataHub is designed to scale horizontally. Each component can be scaled
+        independently:
+      </p>
+
+      <ul>
+        <li>GMS can be deployed as multiple replicas behind a load balancer</li>
+        <li>Frontend service supports horizontal scaling with session affinity</li>
+        <li>Elasticsearch can be clustered for increased search performance</li>
+        <li>Kafka topics can be partitioned for parallel processing</li>
+      </ul>
+
+      <h2>Security and Authentication</h2>
+
+      <p>
+        DataHub supports various authentication mechanisms including:
+      </p>
+
+      <ul>
+        <li>Native username/password authentication</li>
+        <li>OIDC (OpenID Connect) integration</li>
+        <li>LDAP integration</li>
+        <li>SAML 2.0 single sign-on</li>
+      </ul>
+
+      <p>
+        Authorization is handled through a policy-based system that allows fine-grained
+        control over who can view, edit, or manage different types of metadata.
+      </p>
+
+      <h2>Conclusion</h2>
+
+      <p>
+        DataHub's architecture provides a solid foundation for building a modern data
+        catalog. Its modular design, extensive plugin system, and support for various
+        deployment options make it suitable for organizations of all sizes.
+      </p>
+
+      <p>
+        For more detailed information about specific components, deployment options,
+        or development guidelines, please refer to the respective documentation sections.
+      </p>
+    </main>
+
+    <aside class="right-sidebar">
+      <h3>On This Page</h3>
+      <ul style="list-style: none; padding: 0; font-size: 14px;">
+        <li style="padding: 5px 0;"><a href="#intro" style="text-decoration: none; color: #333;">Introduction</a></li>
+        <li style="padding: 5px 0;"><a href="#components" style="text-decoration: none; color: #333;">Core Components</a></li>
+        <li style="padding: 5px 0;"><a href="#diagram" style="text-decoration: none; color: #333;">Architecture Diagram</a></li>
+        <li style="padding: 5px 0;"><a href="#model" style="text-decoration: none; color: #333;">Data Model</a></li>
+        <li style="padding: 5px 0;"><a href="#scale" style="text-decoration: none; color: #333;">Scalability</a></li>
+        <li style="padding: 5px 0;"><a href="#security" style="text-decoration: none; color: #333;">Security</a></li>
+      </ul>
+
+      <div class="advertisement" style="margin-top: 30px;">
+        <strong>Related Content</strong><br>
+        Check out our courses
+      </div>
+
+      <div style="margin-top: 30px; padding: 15px; background: #e8f5e9; border-radius: 5px;">
+        <strong>💡 Tip</strong><br>
+        <small>Use PagePDF extension to print only the main content!</small>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 TechDocs. All rights reserved.</p>
+    <p>
+      <a href="#" style="color: #4ecca3; margin: 0 10px;">Privacy Policy</a>
+      <a href="#" style="color: #4ecca3; margin: 0 10px;">Terms of Service</a>
+      <a href="#" style="color: #4ecca3; margin: 0 10px;">Contact Us</a>
+    </p>
+  </footer>
+</body>
+</html>

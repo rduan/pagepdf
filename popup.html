@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PagePDF</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📄 PagePDF</h1>
+      <p class="subtitle">Print smart, print clean</p>
+    </div>
+
+    <div class="content">
+      <div id="status" class="status hidden"></div>
+
+      <button id="printBtn" class="btn btn-primary">
+        <span class="icon">🖨️</span>
+        Print Main Content to PDF
+      </button>
+
+      <div class="options">
+        <label class="checkbox-label">
+          <input type="checkbox" id="removeImages" />
+          <span>Remove images (text only)</span>
+        </label>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="includeLinks" checked />
+          <span>Keep hyperlinks</span>
+        </label>
+      </div>
+
+      <div class="info">
+        <p class="info-text">
+          This extension intelligently identifies and extracts the main content
+          of the page, excluding navigation, sidebars, and other clutter.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
